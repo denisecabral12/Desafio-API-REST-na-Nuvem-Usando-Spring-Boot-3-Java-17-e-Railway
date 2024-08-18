@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import me.dio.controller.dto.UserDto;
+import me.dio.dto.UserDto;
 import me.dio.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,7 @@ public record UserController(UserService userService) {
 
     @GetMapping
     @Operation(summary = "Get all users", description = "Retrieve a list of all registered users")
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Operation successful")
     })
     public ResponseEntity<List<UserDto>> findAll() {

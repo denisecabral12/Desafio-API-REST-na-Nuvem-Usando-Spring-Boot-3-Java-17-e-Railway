@@ -1,7 +1,9 @@
 plugins {
   id 'java'
-  id 'org.springframework.boot' version '3.1.1'
+  id 'org.springframework.boot' version '3.3.2'
   id 'io.spring.dependency-management' version '1.1.0'
+  // Newer patch version of Spring Boot available: 3.1.12
+  // OSS support for Spring Boot 3.1.x ended on 2024-05-18, get commercial support until 2025-08-18 via Tanzu Spring Runtime at https://spring.io/support
 }
 
 group = 'me.dio'
