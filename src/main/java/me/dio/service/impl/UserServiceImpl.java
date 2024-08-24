@@ -5,6 +5,11 @@ import me.dio.domain.repository.UserRepository;
 import me.dio.service.UserService;
 import me.dio.service.exception.BusinessException;
 import me.dio.service.exception.NotFoundException;
+import me.dio.util.Constants;
+import me.dio.validation.UserValidator;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,10 +20,6 @@ import static java.util.Optional.ofNullable;
 @Service
 public class UserServiceImpl implements UserService {
 
-    /**
-     * ID de usuário utilizado na Santander Dev Week 2023.
-     * Por isso, vamos criar algumas regras para mantê-lo integro.
-     */
     private static final Long UNCHANGEABLE_USER_ID = 1L;
 
     private final UserRepository userRepository;
@@ -34,21 +35,21 @@ public class UserServiceImpl implements UserService {
 
     @Transactional(readOnly = true)
     public User findById(Long id) {
-        return this.userRepository.findById(id).orElseThrow(NotFoundException::new);
+        return this.userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(Constants.USER_NOT_FOUND));
     }
 
     @Transactional
     public User create(User userToCreate) {
         ofNullable(userToCreate).orElseThrow(() -> new BusinessException("User to create must not be null."));
-        ofNullable(userToCreate.getAccount()).orElseThrow(() -> new BusinessException("User account must not be null."));
-        ofNullable(userToCreate.getCard()).orElseThrow(() -> new BusinessException("User card must not be null."));
+        UserValidator.validate(userToCreate);
 
         this.validateChangeableId(userToCreate.getId(), "created");
         if (userRepository.existsByAccountNumber(userToCreate.getAccount().getNumber())) {
-            throw new BusinessException("This account number already exists.");
+            throw new BusinessException(Constants.ACCOUNT_ALREADY_EXISTS);
         }
         if (userRepository.existsByCardNumber(userToCreate.getCard().getNumber())) {
-            throw new BusinessException("This card number already exists.");
+            throw new BusinessException(Constants.CARD_ALREADY_EXISTS);
         }
         return this.userRepository.save(userToCreate);
     }
@@ -82,5 +83,11 @@ public class UserServiceImpl implements UserService {
             throw new BusinessException("User with ID %d can not be %s.".formatted(UNCHANGEABLE_USER_ID, operation));
         }
     }
+
+    @Transactional(readOnly = true)
+    public Page<User> findAll(Pageable pageable) {
+        return this.userRepository.findAll(pageable);
+    }
+
 }
 

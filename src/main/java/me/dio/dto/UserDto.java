@@ -1,8 +1,10 @@
-package me.dio.controller.dto;
+package me.dio.dto;
 
 import me.dio.domain.model.User;
 
 import java.util.List;
+
+import jakarta.validation.constraints.NotBlank;
 
 import static java.util.Collections.emptyList;
 import static java.util.Optional.ofNullable;
@@ -10,6 +12,7 @@ import static java.util.stream.Collectors.toList;
 
 public record UserDto(
         Long id,
+        @NotBlank(message = "Name is mandatory")
         String name,
         AccountDto account,
         CardDto card,
