@@ -1,5 +1,8 @@
 package me.dio.controller.dto;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import me.dio.domain.model.User;
 
 import java.util.List;
@@ -10,11 +13,15 @@ import static java.util.stream.Collectors.toList;
 
 public record UserDto(
         Long id,
+        @NotBlank(message = "Name is required")
+        @Size(min = 3, max = 100, message = "Name must be between 3 and 100 characters")
         String name,
+        @Valid
         AccountDto account,
+        @Valid
         CardDto card,
-        List<FeatureDto> features,
-        List<NewsDto> news) {
+        List<@Valid FeatureDto> features,
+        List<@Valid NewsDto> news) {
 
     public UserDto(User model) {
         this(
