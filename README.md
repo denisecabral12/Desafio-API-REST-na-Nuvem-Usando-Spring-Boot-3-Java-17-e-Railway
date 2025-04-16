@@ -32,12 +32,13 @@ This is a modern digital banking system developed with Spring Boot 3, Java 17, a
 - Bootstrap 5
 - Font Awesome
 - Railway (deploy)
+- Gradle (build)
 
 ## 🚀 Como Executar / How to Run
 
 ### Pré-requisitos / Prerequisites
 - Java 17
-- Maven
+- Gradle
 - Git
 
 ### Instalação / Installation
@@ -54,7 +55,7 @@ cd nome-do-repositorio
 
 3. Execute o projeto:
 ```bash
-./mvnw spring-boot:run
+./gradlew bootRun
 ```
 
 ### Perfis / Profiles
@@ -125,3 +126,4 @@ This project is under the MIT license. See the [LICENSE](LICENSE) file for more 
 - [Railway](https://railway.app)
 - [Bootstrap](https://getbootstrap.com)
 - [Font Awesome](https://fontawesome.com)
+- [Gradle](https://gradle.org)
