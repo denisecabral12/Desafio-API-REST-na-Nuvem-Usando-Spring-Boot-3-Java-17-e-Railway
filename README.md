@@ -33,7 +33,7 @@ Este é um sistema bancário digital moderno desenvolvido com Spring Boot 3, Jav
 
 ## 🚀 Como Executar
 
-### Pré-requisitos / Prerequisites
+### Pré-requisitos
 - Java 17
 - Gradle
 - Git
