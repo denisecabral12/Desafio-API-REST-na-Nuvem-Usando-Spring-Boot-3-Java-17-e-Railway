@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cards - Bank API Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/web">Bank API Dashboard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/web/accounts">Accounts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/web/cards">Cards</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/web/features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/web/news">News</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Cards</h1>
+            <a th:href="@{/web/cards/new}" class="btn btn-primary">Create New Card</a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Number</th>
+                        <th>Limit</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="card : ${cards}">
+                        <td th:text="${card.id}"></td>
+                        <td th:text="${card.number}"></td>
+                        <td th:text="${#numbers.formatDecimal(card.limit, 1, 2)}"></td>
+                        <td>
+                            <a th:href="@{/web/cards/edit/{id}(id=${card.id})}" class="btn btn-sm btn-warning">Edit</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

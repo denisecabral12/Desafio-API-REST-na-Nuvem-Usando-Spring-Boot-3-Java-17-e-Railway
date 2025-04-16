@@ -1,66 +1,127 @@
-# Santander Dev Week 2023 Java API
+# Sistema Bancário Digital / Digital Banking System
 
-RESTful API da Santander Dev Week 2023 construída em Java 17 com Spring Boot 3 com aulas da DIO - Digital Innovation One.
+## 📋 Sobre o Projeto / About the Project
 
-## Principais Tecnologias
- - **Java 17**: Utilizaremos a versão LTS mais recente do Java para tirar vantagem das últimas inovações que essa linguagem robusta e amplamente utilizada oferece;
- - **Spring Boot 3**: Trabalharemos com a mais nova versão do Spring Boot, que maximiza a produtividade do desenvolvedor por meio de sua poderosa premissa de autoconfiguração;
- - **Spring Data JPA**: Exploraremos como essa ferramenta pode simplificar nossa camada de acesso aos dados, facilitando a integração com bancos de dados SQL;
- - **OpenAPI (Swagger)**: Vamos criar uma documentação de API eficaz e fácil de entender usando a OpenAPI (Swagger), perfeitamente alinhada com a alta produtividade que o Spring Boot oferece;
- - **Railway**: facilita o deploy e monitoramento de nossas soluções na nuvem, além de oferecer diversos bancos de dados como serviço e pipelines de CI/CD.
+Este é um sistema bancário digital moderno desenvolvido com Spring Boot 3, Java 17 e implantado na nuvem usando Railway. O sistema oferece uma API REST completa para gerenciamento de contas bancárias, cartões, recursos e notícias, além de uma interface web amigável.
 
-## [Link do Figma](https://www.figma.com/file/0ZsjwjsYlYd3timxqMWlbj/SANTANDER---Projeto-Web%2FMobile?type=design&node-id=1421%3A432&mode=design&t=6dPQuerScEQH0zAn-1)
+This is a modern digital banking system developed with Spring Boot 3, Java 17, and deployed to the cloud using Railway. The system offers a complete REST API for managing bank accounts, cards, features, and news, along with a user-friendly web interface.
 
-O Figma foi utilizado para a abstração do domínio desta API, sendo útil na análise e projeto da solução.
+## ✨ Funcionalidades / Features
 
-## Diagrama de Classes (Domínio da API)
+### API REST
+- Gerenciamento de contas bancárias
+- Gerenciamento de cartões
+- Gerenciamento de recursos (features)
+- Gerenciamento de notícias
+- Documentação Swagger/OpenAPI
 
-```mermaid
-classDiagram
-  class User {
-    -String name
-    -Account account
-    -Feature[] features
-    -Card card
-    -News[] news
-  }
+### Interface Web
+- Dashboard intuitivo
+- Listagem de todas as entidades
+- Formulários para criação e edição
+- Navegação responsiva
+- Design moderno com Bootstrap
 
-  class Account {
-    -String number
-    -String agency
-    -Number balance
-    -Number limit
-  }
+## 🛠️ Tecnologias / Technologies
 
-  class Feature {
-    -String icon
-    -String description
-  }
+- Java 17
+- Spring Boot 3
+- Spring Data JPA
+- H2 Database (desenvolvimento) / PostgreSQL (produção)
+- Thymeleaf
+- Bootstrap 5
+- Font Awesome
+- Railway (deploy)
 
-  class Card {
-    -String number
-    -Number limit
-  }
+## 🚀 Como Executar / How to Run
 
-  class News {
-    -String icon
-    -String description
-  }
+### Pré-requisitos / Prerequisites
+- Java 17
+- Maven
+- Git
 
-  User "1" *-- "1" Account
-  User "1" *-- "N" Feature
-  User "1" *-- "1" Card
-  User "1" *-- "N" News
+### Instalação / Installation
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/seu-usuario/nome-do-repositorio.git
 ```
 
-## Documentação da API (Swagger)
+2. Entre no diretório do projeto:
+```bash
+cd nome-do-repositorio
+```
 
-### [https://sdw-2023-prd.up.railway.app/swagger-ui.html](https://sdw-2023-prd.up.railway.app/swagger-ui.html)
+3. Execute o projeto:
+```bash
+./mvnw spring-boot:run
+```
 
-Esta API ficará disponível no Railway por um período de tempo limitado, mas este é um código-fonte aberto. Portanto, sintam-se à vontade para cloná-lo, modificá-lo (já que é um bom projeto base para novos projetos) e executar localmente ou onde achar mais interessante! Só não esquece de marcar a gente quando divulgar a sua solução 🥰
+### Perfis / Profiles
 
-### IMPORTANTE
+- `dev`: Ambiente de desenvolvimento (H2 Database)
+- `prd`: Ambiente de produção (PostgreSQL)
 
-Aos interessados no desenvolvimento da tela inicial do App do Santander (Figma) em Angular, Android, iOS ou Flutter... Caso a URL produtiva não esteja mais disponível, deixamos um Backup no GitHub Pages, é só dar um GET lá 😘
-- URL de Produção: https://sdw-2023-prd.up.railway.app/users/1
-- Mock (Backup): https://digitalinnovationone.github.io/santander-dev-week-2023-api/mocks/find_one.json
+## 📚 Documentação / Documentation
+
+### API REST
+A documentação da API está disponível em:
+- Swagger UI: `http://localhost:8080/swagger-ui.html`
+- OpenAPI: `http://localhost:8080/v3/api-docs`
+
+### Endpoints Principais / Main Endpoints
+
+#### Contas / Accounts
+- GET `/api/accounts` - Lista todas as contas
+- GET `/api/accounts/{id}` - Busca uma conta específica
+- POST `/api/accounts` - Cria uma nova conta
+- PUT `/api/accounts/{id}` - Atualiza uma conta
+- DELETE `/api/accounts/{id}` - Remove uma conta
+
+#### Cartões / Cards
+- GET `/api/cards` - Lista todos os cartões
+- GET `/api/cards/{id}` - Busca um cartão específico
+- POST `/api/cards` - Cria um novo cartão
+- PUT `/api/cards/{id}` - Atualiza um cartão
+- DELETE `/api/cards/{id}` - Remove um cartão
+
+#### Recursos / Features
+- GET `/api/features` - Lista todos os recursos
+- GET `/api/features/{id}` - Busca um recurso específico
+- POST `/api/features` - Cria um novo recurso
+- PUT `/api/features/{id}` - Atualiza um recurso
+- DELETE `/api/features/{id}` - Remove um recurso
+
+#### Notícias / News
+- GET `/api/news` - Lista todas as notícias
+- GET `/api/news/{id}` - Busca uma notícia específica
+- POST `/api/news` - Cria uma nova notícia
+- PUT `/api/news/{id}` - Atualiza uma notícia
+- DELETE `/api/news/{id}` - Remove uma notícia
+
+### Interface Web
+A interface web está disponível em:
+- Home: `http://localhost:8080/web`
+- Contas: `http://localhost:8080/web/accounts`
+- Cartões: `http://localhost:8080/web/cards`
+- Recursos: `http://localhost:8080/web/features`
+- Notícias: `http://localhost:8080/web/news`
+
+## 🤝 Contribuição / Contributing
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
+
+Contributions are welcome! Feel free to open issues or submit pull requests.
+
+## 📝 Licença / License
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+This project is under the MIT license. See the [LICENSE](LICENSE) file for more details.
+
+## 🙏 Agradecimentos / Acknowledgments
+
+- [Spring Boot](https://spring.io/projects/spring-boot)
+- [Railway](https://railway.app)
+- [Bootstrap](https://getbootstrap.com)
+- [Font Awesome](https://fontawesome.com)

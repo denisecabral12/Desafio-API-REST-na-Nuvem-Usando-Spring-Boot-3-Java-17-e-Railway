@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accounts - Bank API Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/web">Bank API Dashboard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/web/accounts">Accounts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/web/cards">Cards</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/web/features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/web/news">News</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Accounts</h1>
+            <a th:href="@{/web/accounts/new}" class="btn btn-primary">Create New Account</a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Number</th>
+                        <th>Agency</th>
+                        <th>Balance</th>
+                        <th>Limit</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="account : ${accounts}">
+                        <td th:text="${account.id}"></td>
+                        <td th:text="${account.number}"></td>
+                        <td th:text="${account.agency}"></td>
+                        <td th:text="${#numbers.formatDecimal(account.balance, 1, 2)}"></td>
+                        <td th:text="${#numbers.formatDecimal(account.limit, 1, 2)}"></td>
+                        <td>
+                            <a th:href="@{/web/accounts/edit/{id}(id=${account.id})}" class="btn btn-sm btn-warning">Edit</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Create Account Modal -->
+    <div class="modal fade" id="createAccountModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createAccountForm">
+                        <div class="mb-3">
+                            <label for="number" class="form-label">Account Number</label>
+                            <input type="text" class="form-control" id="number" name="number" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="agency" class="form-label">Agency</label>
+                            <input type="text" class="form-control" id="agency" name="agency" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="balance" class="form-label">Balance</label>
+                            <input type="number" step="0.01" class="form-control" id="balance" name="balance" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="limit" class="form-label">Limit</label>
+                            <input type="number" step="0.01" class="form-control" id="limit" name="limit" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="createAccount()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function createAccount() {
+            const form = document.getElementById('createAccountForm');
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            fetch('/accounts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.reload();
+                } else {
+                    alert('Error creating account');
+                }
+            });
+        }
+
+        function editAccount(id) {
+            // Implement edit functionality
+        }
+
+        function deleteAccount(id) {
+            if (confirm('Are you sure you want to delete this account?')) {
+                fetch(`/accounts/${id}`, {
+                    method: 'DELETE'
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload();
+                    } else {
+                        alert('Error deleting account');
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html> 

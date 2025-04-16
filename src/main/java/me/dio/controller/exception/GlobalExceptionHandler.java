@@ -15,7 +15,6 @@ import java.util.Map;
 
 import me.dio.service.exception.BusinessException;
 import me.dio.service.exception.NotFoundException;
-import me.dio.service.exception.ResourceNotFoundException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -28,8 +27,14 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<String> handleNoContentException() {
-        return new ResponseEntity<>("Resource ID not found.", HttpStatus.NOT_FOUND);
+    public ResponseEntity<Map<String, Object>> handleNoContentException(NotFoundException ex) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("timestamp", LocalDateTime.now());
+        response.put("status", HttpStatus.NOT_FOUND.value());
+        response.put("error", "Not Found");
+        response.put("message", ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 
     @ExceptionHandler(Throwable.class)
@@ -55,17 +60,6 @@ public class GlobalExceptionHandler {
         response.put("details", errors);
 
         return ResponseEntity.badRequest().body(response);
-    }
-
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleResourceNotFoundException(ResourceNotFoundException ex) {
-        Map<String, Object> response = new HashMap<>();
-        response.put("timestamp", LocalDateTime.now());
-        response.put("status", HttpStatus.NOT_FOUND.value());
-        response.put("error", "Not Found");
-        response.put("message", ex.getMessage());
-
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 
     @ExceptionHandler(Exception.class)
