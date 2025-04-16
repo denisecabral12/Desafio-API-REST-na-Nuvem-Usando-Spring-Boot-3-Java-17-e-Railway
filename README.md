@@ -1,12 +1,10 @@
-# Sistema Bancário Digital / Digital Banking System
+# Sistema Bancário Digital
 
-## 📋 Sobre o Projeto / About the Project
+## 📋 Sobre o Projeto
 
-Este é um sistema bancário digital moderno desenvolvido com Spring Boot 3, Java 17 e implantado na nuvem usando Railway. O sistema oferece uma API REST completa para gerenciamento de contas bancárias, cartões, recursos e notícias, além de uma interface web amigável.
+Este é um sistema bancário digital moderno desenvolvido com Spring Boot 3, Java 17. O sistema oferece uma API REST completa para gerenciamento de contas bancárias, cartões, recursos e notícias, além de uma interface web amigável.
 
-This is a modern digital banking system developed with Spring Boot 3, Java 17, and deployed to the cloud using Railway. The system offers a complete REST API for managing bank accounts, cards, features, and news, along with a user-friendly web interface.
-
-## ✨ Funcionalidades / Features
+## ✨ Funcionalidades
 
 ### API REST
 - Gerenciamento de contas bancárias
@@ -19,10 +17,9 @@ This is a modern digital banking system developed with Spring Boot 3, Java 17, a
 - Dashboard intuitivo
 - Listagem de todas as entidades
 - Formulários para criação e edição
-- Navegação responsiva
 - Design moderno com Bootstrap
 
-## 🛠️ Tecnologias / Technologies
+## 🛠️ Tecnologias
 
 - Java 17
 - Spring Boot 3
@@ -34,23 +31,23 @@ This is a modern digital banking system developed with Spring Boot 3, Java 17, a
 - Railway (deploy)
 - Gradle (build)
 
-## 🚀 Como Executar / How to Run
+## 🚀 Como Executar
 
 ### Pré-requisitos / Prerequisites
 - Java 17
 - Gradle
 - Git
 
-### Instalação / Installation
+### Instalação
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
+git clone https://github.com/denisecabral12/Desafio-API-REST-na-Nuvem-Usando-Spring-Boot-3-Java-17-e-Railway.git
 ```
 
 2. Entre no diretório do projeto:
 ```bash
-cd nome-do-repositorio
+cd nome-da-pasta
 ```
 
 3. Execute o projeto:
@@ -63,14 +60,14 @@ cd nome-do-repositorio
 - `dev`: Ambiente de desenvolvimento (H2 Database)
 - `prd`: Ambiente de produção (PostgreSQL)
 
-## 📚 Documentação / Documentation
+## 📚 Documentação
 
 ### API REST
 A documentação da API está disponível em:
 - Swagger UI: `http://localhost:8080/swagger-ui.html`
 - OpenAPI: `http://localhost:8080/v3/api-docs`
 
-### Endpoints Principais / Main Endpoints
+### Endpoints Principais
 
 #### Contas / Accounts
 - GET `/api/accounts` - Lista todas as contas
@@ -107,23 +104,3 @@ A interface web está disponível em:
 - Cartões: `http://localhost:8080/web/cards`
 - Recursos: `http://localhost:8080/web/features`
 - Notícias: `http://localhost:8080/web/news`
-
-## 🤝 Contribuição / Contributing
-
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
-
-Contributions are welcome! Feel free to open issues or submit pull requests.
-
-## 📝 Licença / License
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-This project is under the MIT license. See the [LICENSE](LICENSE) file for more details.
-
-## 🙏 Agradecimentos / Acknowledgments
-
-- [Spring Boot](https://spring.io/projects/spring-boot)
-- [Railway](https://railway.app)
-- [Bootstrap](https://getbootstrap.com)
-- [Font Awesome](https://fontawesome.com)
-- [Gradle](https://gradle.org)
